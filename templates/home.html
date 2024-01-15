@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IIM Admission Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='StyleSheet.css') }}"
+    />
+  </head>
+  <body>
+    <div class="Container">
+      <form id="admissionForm" action="{{ url_for('predict') }}" method="post">
+        <h2>Prediction For IIM</h2>
+        <div class="content">
+            <div class="input-box">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" />
+            </div>
+          <div class="input-box">
+            <label>Gender:</label>
+            <div class="radio-group">
+            <div class="radio-container">
+              <input
+                type="radio"
+                name="gender"
+                id="male"
+                value="male"
+                required
+              />
+              <label for="male">Male</label>
+            </div>
+            <div class="radio-container">
+              <input
+                type="radio"
+                name="gender"
+                id="female"
+                value="female"
+                required
+              />
+              <label for="female">Female</label>
+            </div>
+          </div>
+          </div>
+          <div class="input-box">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+              <option value="general">General</option>
+              <option value="obc">NC_OBC</option>
+              <option value="sc">SC</option>
+              <option value="st">ST</option>
+            </select>
+          </div>
+
+          <!-- <div class="input-box">
+            <label for="grade10">Grade 10:</label>
+            <input
+              type="number"
+              id="grade10"
+              name="grade10"
+              min="0"
+              max="100"
+              required
+            />
+          </div> -->
+
+          <div class="input-box">
+            <label for="grade10">Grade 10:</label>
+            <input
+                type="number"
+                id="grade10"
+                name="grade10"
+                min="0"
+                max="100"
+                step="0.01"
+                required
+            />
+        </div>
+        
+                
+
+          <div class="input-box">
+            <label for="grade12">Grade 12:</label>
+            <input
+              type="number"
+              id="grade12"
+              name="grade12"
+              min="0"
+              max="100"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="graduationScore">Graduation Score:</label>
+            <input
+              type="number"
+              id="graduationScore"
+              name="graduationScore"
+              min="0"
+              max="100"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="graduationType">Graduation Type:</label>
+            <input type="text" id="graduationType" name="graduationType" />
+          </div>
+
+          <div class="input-box">
+            <label for="admissionTestScore">Admission Test Score:</label>
+            <input
+              type="number"
+              id="admissionTestScore"
+              name="admissionTestScore"
+              min="0"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="input-box">
+            <label for="workExperience">Work Experience (months):</label>
+            <input
+              type="number"
+              id="workExperience"
+              name="workExperience"
+              min="0"
+              required
+            />
+          </div>
+
+          <!-- <div class="input-box">
+            <label for="selectedTargetVariable">Select Target Variable:</label>
+            <select
+              id="selectedTargetVariable"
+              name="selectedTargetVariable"
+              required
+            >
+              <option value="1">IIM_A</option>
+              <option value="2">IIM_B</option>
+              <option value="3">IIM_C</option>
+              <option value="4">IIM_I</option>
+              <option value="5">IIM_K</option>
+              <option value="6">IIM_L</option>
+            </select>
+          </div> -->
+        </div>
+
+        <div class="button-container">
+          <button type="submit">Predict IIM</button>
+        </div>
+      </form>
+      <div>
+        {% if predictions %}
+            <h2>Predictions:</h2>
+            <table border="1">
+                <tr>
+                    <th>IIM</th>
+                    <th>Percentage Selected</th>
+                </tr>
+                {% for target, result in predictions.items() %}
+    <tr>
+        <td>
+            {% if target == '1' %}
+                IIM A
+            {% elif target == '2' %}
+                IIM B
+            {% elif target == '3' %}
+                IIM C
+            {% elif target == '4' %}
+                IIM I
+            {% elif target == '5' %}
+                IIM K
+            {% elif target == '6' %}
+                IIM L
+            {% else %}
+                Unknown IIM
+            {% endif %}
+        </td>
+        <td>
+            {% if result['predicted_class'] == 1 %}
+                You have a chance!
+            {% else %}
+                No chance
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</div>
+    </div>
+    
+  </body>
+</html>
