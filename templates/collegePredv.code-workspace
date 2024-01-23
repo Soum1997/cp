@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "collegePredv",
+			"path": ".."
+		},
+		{
+			"name": "models",
+			"path": "../../../../Downloads/cp-master/cp-master/models"
+		}
+	],
+	"settings": {}
+}

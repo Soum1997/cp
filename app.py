@@ -59,7 +59,7 @@ def predict():
     grade10 = float(request.form['grade10'])
     grade12 = float(request.form['grade12'])
     graduation_score = float(request.form['graduationScore'])
-    graduation_type = 1 if request.form['graduationType'] == 'Engineer' else 0  # Convert graduation_type to numeric
+    graduation_type = 0 if request.form['graduationType'] == 'Engineer' else 1  # Convert graduation_type to numeric
     admission_test_score = float(request.form['admissionTestScore'])
     work_experience = float(request.form['workExperience'])
 

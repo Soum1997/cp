@@ -161,7 +161,7 @@
             <table border="1">
                 <tr>
                     <th>IIM</th>
-                    <th>Percentage Selected</th>
+                    <th>Chances Of Selection</th>
                 </tr>
                 {% for target, result in predictions.items() %}
     <tr>
@@ -184,9 +184,11 @@
         </td>
         <td>
             {% if result['predicted_class'] == 1 %}
-                You have a chance!
+                <!-- You have a chance! -->
+                1
             {% else %}
-                No chance
+                <!-- No chance -->
+                0
             {% endif %}
         </td>
     </tr>
