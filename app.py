@@ -92,7 +92,7 @@ def predict():
         }
 
     # You can now use 'predictions' in your template
-    return render_template('home.html', predictions=predictions)
+    return render_template('predict.html', predictions=predictions)
 
 if __name__ == '__main__':
     app.run(debug=True)

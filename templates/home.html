@@ -8,44 +8,35 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='StyleSheet.css') }}"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
   </head>
   <body>
+    <section>
+      <div class="image-container">
+        <img src="https://www.imsindia.com/zero-fee-enrollment/index_files/zero-fees-right.png"/>
+    </div>
     <div class="Container">
       <form id="admissionForm" action="{{ url_for('predict') }}" method="post">
-        <h2>Prediction For IIM</h2>
         <div class="content">
-            <div class="input-box">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" />
-            </div>
+          <h2>Prediction For IIM</h2>
           <div class="input-box">
-            <label>Gender:</label>
-            <div class="radio-group">
-            <div class="radio-container">
-              <input
-                type="radio"
-                name="gender"
-                id="male"
-                value="male"
-                required
-              />
-              <label for="male">Male</label>
-            </div>
-            <div class="radio-container">
-              <input
-                type="radio"
-                name="gender"
-                id="female"
-                value="female"
-                required
-              />
-              <label for="female">Female</label>
-            </div>
+            <input type="text" id="name" name="name" placeholder="Name"/>
           </div>
-          </div>
+          
           <div class="input-box">
-            <label for="category">Category:</label>
+            <!-- <label for="selectGender">Gender:</label> -->
+            <select id="selectGender" name="gender" required>
+              <option value="" selected disabled>Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          
+          <div class="input-box">
+            <!-- <label for="category">Category:</label> -->
             <select id="category" name="category" required>
+              <option value="" selected disabled>Select Category</option>
               <option value="general">General</option>
               <option value="obc">NC_OBC</option>
               <option value="sc">SC</option>
@@ -66,11 +57,12 @@
           </div> -->
 
           <div class="input-box">
-            <label for="grade10">Grade 10:</label>
+            <!-- <label for="grade10">Grade 10:</label> -->
             <input
                 type="number"
                 id="grade10"
                 name="grade10"
+                placeholder="Grade 10"
                 min="0"
                 max="100"
                 step="0.01"
@@ -81,11 +73,12 @@
                 
 
           <div class="input-box">
-            <label for="grade12">Grade 12:</label>
+            <!-- <label for="grade12">Grade 12:</label> -->
             <input
               type="number"
               id="grade12"
               name="grade12"
+              placeholder="Grade 12"
               min="0"
               max="100"
               step="0.01"
@@ -94,11 +87,12 @@
           </div>
 
           <div class="input-box">
-            <label for="graduationScore">Graduation Score:</label>
+            <!-- <label for="graduationScore">Graduation Score:</label> -->
             <input
               type="number"
               id="graduationScore"
               name="graduationScore"
+              placeholder="Graduation Score"
               min="0"
               max="100"
               step="0.01"
@@ -107,16 +101,17 @@
           </div>
 
           <div class="input-box">
-            <label for="graduationType">Graduation Type:</label>
-            <input type="text" id="graduationType" name="graduationType" />
+            <!-- <label for="graduationType">Graduation Type:</label> -->
+            <input type="text" id="graduationType" name="graduationType" placeholder="Graduation Type" />
           </div>
 
           <div class="input-box">
-            <label for="admissionTestScore">Admission Test Score:</label>
+            <!-- <label for="admissionTestScore">Admission Test Score:</label> -->
             <input
               type="number"
               id="admissionTestScore"
               name="admissionTestScore"
+              placeholder="Admission Test Score"
               min="0"
               step="0.01"
               required
@@ -124,11 +119,12 @@
           </div>
 
           <div class="input-box">
-            <label for="workExperience">Work Experience (months):</label>
+            <!-- <label for="workExperience">Work Experience (months):</label> -->
             <input
               type="number"
               id="workExperience"
               name="workExperience"
+              placeholder="Work Experience(months)"
               min="0"
               required
             />
@@ -150,54 +146,28 @@
             </select>
           </div> -->
         </div>
-
+        <p style="font-style: italic; color: #070707;">*All predictions and chances of getting IIMs are based on past year trends and cutoffs. They are subject to vary in current years due to various factors.</p>
         <div class="button-container">
-          <button type="submit">Predict IIM</button>
-        </div>
+          <button type="submit" id="predictButton">Predict IIM</button>
+          <button type="button" id="resetButton">Reset Form</button>
+      </div>
       </form>
-      <div>
-        {% if predictions %}
-            <h2>Predictions:</h2>
-            <table border="1">
-                <tr>
-                    <th>IIM</th>
-                    <th>Chances Of Selection</th>
-                </tr>
-                {% for target, result in predictions.items() %}
-    <tr>
-        <td>
-            {% if target == '1' %}
-                IIM A
-            {% elif target == '2' %}
-                IIM B
-            {% elif target == '3' %}
-                IIM C
-            {% elif target == '4' %}
-                IIM I
-            {% elif target == '5' %}
-                IIM K
-            {% elif target == '6' %}
-                IIM L
-            {% else %}
-                Unknown IIM
-            {% endif %}
-        </td>
-        <td>
-            {% if result['predicted_class'] == 1 %}
-                <!-- You have a chance! -->
-                1
-            {% else %}
-                <!-- No chance -->
-                0
-            {% endif %}
-        </td>
-    </tr>
-{% endfor %}
-            </table>
-        {% endif %}
+      <script>
+        function submitForm(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Redirect to the "predict.html" page
+            window.location.href = "{{ url_for('predict') }}";
+        }
+
+        function resetForm() {
+            document.getElementById("admissionForm").reset();
+            document.getElementById("predictionsTable").style.display = "none";
+        }
+    </script>
     </div>
-</div>
-    </div>
-    
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='StyleSheet.css') }}"
+    />
+    <style>
+        body {
+                margin: 0;
+                padding: 0;
+                color: white; /* Set text color to contrast with the background */
+                font-family: Arial, sans-serif;
+                position: relative;
+            }
+            body::before {
+            content: "";
+            /* background-image: url(https://s3-ap-south-1.amazonaws.com/myims.imsindia.com/wp-content/themes/ims/img/home/tips/banner-bg.png); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Send the background image to the back */
+            /* background-color: #007bff; */
+            }
+            a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-image: linear-gradient(to right, #3468c0, #20bbe6);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            justify-content: center;
+        }
+
+        a:hover {
+            background-image: linear-gradient(to right, #20bbe6, #3468c0);
+        }
+
+            /* Additional styles for content on top of the background */
+            .content {
+            text-align: center;
+            }
+
+/* Your existing styles can go here */
+
+    </style>
+</head>
+<body>
+    <div id="predictionsTable" style="display: {% if predictions %}block{% else %}none{% endif %}">
+        {% if predictions %}
+              <h2>Predictions:</h2>
+              <table class="predictions-table">
+                  <tr>
+                      <th>IIM</th>
+                      <th>Chances Of Selection</th>
+                  </tr>
+                  {% for target, result in predictions.items() %}
+                  <tr>
+                      <td>
+                          {% if target == '1' %}
+                          IIM A
+                          {% elif target == '2' %}
+                          IIM B
+                          {% elif target == '3' %}
+                          IIM C
+                          {% elif target == '4' %}
+                          IIM I
+                          {% elif target == '5' %}
+                          IIM K
+                          {% elif target == '6' %}
+                          IIM L
+                          {% else %}
+                          Unknown IIM
+                          {% endif %}
+                      </td>
+                      <td class="{% if result['predicted_class'] == 1 %}selected{% else %}not-selected{% endif %}">
+                          {% if result['predicted_class'] == 1 %}
+                          You have a chance!
+                          {% else %}
+                          No chance
+                          {% endif %}
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </table>
+              <a href="{{ url_for('home') }}"><button>Check New Prediction</button></a>
+              {% endif %}
+          </div>
+</body>
+</html>
