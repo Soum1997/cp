@@ -30,7 +30,7 @@
             z-index: -1; /* Send the background image to the back */
             /* background-color: #007bff; */
             }
-            a {
+            a, button {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
@@ -40,9 +40,11 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
             justify-content: center;
+            border: none;
+            cursor: pointer;
         }
 
-        a:hover {
+        a:hover, button:hover {
             background-image: linear-gradient(to right, #20bbe6, #3468c0);
         }
 
@@ -58,43 +60,43 @@
 <body>
     <div id="predictionsTable" style="display: {% if predictions %}block{% else %}none{% endif %}">
         {% if predictions %}
-              <h2>Predictions:</h2>
-              <table class="predictions-table">
-                  <tr>
-                      <th>IIM</th>
-                      <th>Chances Of Selection</th>
-                  </tr>
-                  {% for target, result in predictions.items() %}
-                  <tr>
-                      <td>
-                          {% if target == '1' %}
-                          IIM A
-                          {% elif target == '2' %}
-                          IIM B
-                          {% elif target == '3' %}
-                          IIM C
-                          {% elif target == '4' %}
-                          IIM I
-                          {% elif target == '5' %}
-                          IIM K
-                          {% elif target == '6' %}
-                          IIM L
-                          {% else %}
-                          Unknown IIM
-                          {% endif %}
-                      </td>
-                      <td class="{% if result['predicted_class'] == 1 %}selected{% else %}not-selected{% endif %}">
-                          {% if result['predicted_class'] == 1 %}
-                          You have a chance!
-                          {% else %}
-                          No chance
-                          {% endif %}
-                      </td>
-                  </tr>
-                  {% endfor %}
-              </table>
-              <a href="{{ url_for('home') }}"><button>Check New Prediction</button></a>
-              {% endif %}
-          </div>
+            <h2>Predictions:</h2>
+            <table class="predictions-table">
+                <tr>
+                    <th>IIM</th>
+                    <th>Chances Of Selection</th>
+                </tr>
+                {% for target, result in predictions.items() %}
+                    <tr>
+                        <td>
+                            {% if target == '1' %}
+                                IIM A
+                            {% elif target == '2' %}
+                                IIM B
+                            {% elif target == '3' %}
+                                IIM C
+                            {% elif target == '4' %}
+                                IIM I
+                            {% elif target == '5' %}
+                                IIM K
+                            {% elif target == '6' %}
+                                IIM L
+                            {% else %}
+                                Unknown IIM
+                            {% endif %}
+                        </td>
+                        <td class="{% if result['predicted_class'] == 1 %}selected{% else %}not-selected{% endif %}">
+                            {% if result['predicted_class'] == 1 %}
+                                You have a chance!
+                            {% else %}
+                                No chance
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <button onclick="window.location.href='{{ url_for('home') }}'">Check New Prediction</button>
+        {% endif %}
+    </div>
 </body>
 </html>

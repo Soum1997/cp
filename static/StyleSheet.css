@@ -169,15 +169,19 @@ h2 {
 }
 
 .button-container button#predictButton {
-  background-image: linear-gradient(to right, #3468c0, #20bbe6);
+  /* background-image: linear-gradient(to right, #3468c0, #20bbe6); */
+  background-color: #0481fe;
 }
 
 .button-container button#resetButton {
-  background-image: linear-gradient(to right, #3468c0, #20bbe6);
+  /* background-image: linear-gradient(to right, #0481fe, white); */
+  background-color: #0481fe;
+  
 }
 
-.button-container button:hover {
-  transform: scale(1.05);
+.button-container button#resetButton:hover {
+  background-color: white;
+  color: blue;
 }
 @media (max-width: 600px) {
   .Container {
