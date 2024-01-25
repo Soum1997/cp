@@ -5,7 +5,16 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 
+from flask_mysqldb import MySQL
+
 app = Flask(__name__) 
+
+app.config['MYSQL_HOST'] = 'SoumyaRajan'
+app.config['MYSQL_USER'] = 'root'  
+app.config['MYSQL_PASSWORD'] = 'soumya'  
+app.config['MYSQL_DB'] = 'cp' 
+mysql = MySQL(app)
+
 
 # Define the directory containing your pickle files
 models_directory = 'models'
@@ -87,12 +96,20 @@ def predict():
         prediction_proba = model.predict_proba(user_input_data)
         predicted_class = model.predict(user_input_data)[0]
 
+        # cur = mysql.connection.cursor()
+        # cur.execute("""
+        #     INSERT INTO user_inputs (gender, category, grade_10, grade_12, graduation_score, graduation_type, admission_test_score, work_exp_months)
+        #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        # """, (gender, category, grade10, grade12, graduation_score, graduation_type, admission_test_score, work_experience))
+        # mysql.connection.commit()
+        # cur.close()
+
         predictions[target] = {
             'predicted_class': predicted_class,
         }
 
     # You can now use 'predictions' in your template
-    return render_template('predict.html', predictions=predictions)
+    return render_template('pred.html', predictions=predictions)
 
 if __name__ == '__main__':
     app.run(debug=True)

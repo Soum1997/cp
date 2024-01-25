@@ -1,3 +1,4 @@
+
 * {
   padding: 0;
   margin: 0;
@@ -52,10 +53,10 @@ body {
 } */
 
 h2 {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: bold;
   text-align: left;
-  color: #fff;
+  color: black;
   /* padding-bottom: 8px; */
   /* border-bottom: 1px solid silver; */
 }
@@ -160,7 +161,7 @@ h2 {
 .button-container button {
   flex: 1;
   padding: 15px;
-  font-size: 20px;
+  font-size: 15px;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -176,29 +177,41 @@ h2 {
 .button-container button#resetButton {
   /* background-image: linear-gradient(to right, #0481fe, white); */
   background-color: #0481fe;
-  
+  border: solid #0481fe 1px;
 }
 
 .button-container button#resetButton:hover {
   background-color: white;
   color: blue;
 }
-@media (max-width: 600px) {
+@media (max-width: 1130px) {
+  section {
+    display: flex;
+    flex-direction: column; /* Adjust to column layout on mobile */
+  }
+  .image-container {
+    max-width: 100%; /* Adjust image width to 100% on mobile */
+    background-color: #3468c0;
+  }
+  .image-container img {
+    width: 100%; /* Adjust image width to 100% on mobile */
+    height: auto;
+  }
   .Container {
-    min-width: 280px;
+    max-width: 100%; /* Adjust container width to 100% on mobile */
+    background-color: white;
+    align-items: center;
+    margin: 50px;
   }
 
   .content {
-    max-height: 380px;
+    max-height: none; /* Remove max-height on mobile */
     overflow: auto;
   }
 
   .input-box {
     margin-bottom: 12px;
-  }
-
-  .input-box:nth-child(odd) {
-    justify-content: flex-end;
+    width: 100%; /* Adjust input box width to 100% on mobile */
   }
 
   .gender-category {
@@ -208,8 +221,15 @@ h2 {
   .content::-webkit-scrollbar {
     width: 0;
   }
-}
 
+  .logo {
+    max-width: 70%; /* Adjust logo width to 70% on mobile */
+  }
+
+  #predictionsTable {
+    margin-top: 20px; /* Adjust margin-top on mobile */
+  }
+}
 .radio-group {
   display: flex;
   flex-wrap: wrap;
@@ -256,6 +276,7 @@ h2 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light box shadow for depth */
   max-width: 800px; /* Adjust the max width as needed */
   margin: 0 auto; /* Center the table */
+  margin-top: 40px;
 }
 
 .predictions-table {
@@ -285,6 +306,13 @@ h2 {
   background-color: #eea0a0; /* Light red background for not-selected cells */
   color: #333;
 }
+.logo {
+  max-width: 22%;
+  height: auto;
+  display: block;
+  margin: 20px auto; /* Adjust margin as needed */
+  margin-right: 6px;
+}
 
 
-/* ... remaining styles ... */
+

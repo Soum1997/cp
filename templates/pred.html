@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predictions</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IIM Admission Prediction</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='StyleSheet.css') }}"
@@ -34,7 +34,7 @@
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-image: linear-gradient(to right, #3468c0, #20bbe6);
+            background-color: #0481fe;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
@@ -44,21 +44,22 @@
             cursor: pointer;
         }
 
-        a:hover, button:hover {
+        /* a:hover, button:hover {
             background-image: linear-gradient(to right, #20bbe6, #3468c0);
-        }
-
-            /* Additional styles for content on top of the background */
+        } */
             .content {
             text-align: center;
             }
-
-/* Your existing styles can go here */
-
     </style>
 </head>
-<body>
-    <div id="predictionsTable" style="display: {% if predictions %}block{% else %}none{% endif %}">
+  <body>
+    <section>
+      <div class="image-container">
+        <img src="https://www.imsindia.com/zero-fee-enrollment/index_files/zero-fees-right.png"/>
+    </div>
+    <div class="Container">
+    <img class="logo" src="https://s3-ap-south-1.amazonaws.com/myims.imsindia.com/wp-content/themes/ims/img/ims-logo.svg" />
+    <div id="predictionsTable" style="display: {% if predictions %}block{% else %}none{% endif %}" >
         {% if predictions %}
             <h2>PREDICTIONS:</h2>
             <table class="predictions-table">
@@ -98,5 +99,8 @@
             <button onclick="window.location.href='{{ url_for('home') }}'">Check New Prediction</button>
         {% endif %}
     </div>
-</body>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
 </html>
